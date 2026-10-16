@@ -20,7 +20,7 @@ To preserve code quality, simulation performance, and scientific validity, pleas
 
 1. Fork the repository and clone your fork:
    ```bash
-   git clone https://github.com/<your-username>/ArtificialLifeSimulator.git
+   git clone https://github.com/anfiquehussain/ArtificialLifeSimulator.git
    cd ArtificialLifeSimulator
    ```
 2. Create a topic branch:

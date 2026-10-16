@@ -4,7 +4,7 @@
 [![CMake](https://img.shields.io/badge/Build-CMake%203.22%2B-064F8C.svg?logo=cmake)](https://cmake.org)
 [![SFML 3](https://img.shields.io/badge/Graphics-SFML%203.0.0-8CC445.svg?logo=sfml)](https://www.sfml-dev.org)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
-[![CI Build & Test](https://github.com/your-username/ArtificialLifeSimulator/actions/workflows/ci.yml/badge.svg)](.github/workflows/ci.yml)
+[![CI Build & Test](https://github.com/anfiquehussain/ArtificialLifeSimulator/actions/workflows/ci.yml/badge.svg)](https://github.com/anfiquehussain/ArtificialLifeSimulator/actions)
 
 A modular, deterministic computational laboratory and evolutionary ecology simulator built in **C++20** with **SFML 3**. Designed for researching emergence, natural selection dynamics, sensorimotor neural behavior, and multi-species ecological stability.
 
