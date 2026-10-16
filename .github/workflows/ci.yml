@@ -1,0 +1,52 @@
+name: CI Build & Test
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  build-windows:
+    name: Windows (MSVC)
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Enable MSVC Developer Command Prompt
+        uses: ilammy/msvc-dev-cmd@v1
+
+      - name: Configure CMake
+        run: cmake -B build -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build All Targets
+        run: cmake --build build --config Release --parallel
+
+      - name: Run Automated Test Suites
+        run: ctest --test-dir build -C Release --output-on-failure
+
+  build-linux:
+    name: Linux (Ubuntu GCC)
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Install System Dependencies for SFML
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ninja-build \
+            libxrandr-dev libxcursor-dev libxi-dev libudev-dev \
+            libgl1-mesa-dev libflac-dev libogg-dev libvorbis-dev
+
+      - name: Configure CMake
+        run: cmake -B build -G Ninja -DCMAKE_BUILD_TYPE=Release
+
+      - name: Build All Targets
+        run: cmake --build build --parallel
+
+      - name: Run Automated Test Suites
+        run: ctest --test-dir build --output-on-failure

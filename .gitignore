@@ -1,0 +1,68 @@
+# ==========================================
+# Build Artifacts & Output Directories
+# ==========================================
+build/
+build-*/
+bin/
+lib/
+out/
+.cache/
+
+# ==========================================
+# CMake Generated Files
+# ==========================================
+CMakeCache.txt
+CMakeFiles/
+cmake_install.cmake
+CTestTestfile.cmake
+Testing/
+compile_commands.json
+install_local_manifest.txt
+CPackConfig.cmake
+CPackSourceConfig.cmake
+_deps/
+
+# ==========================================
+# Visual Studio / MSVC / Compilers
+# ==========================================
+.vs/
+*.obj
+*.exe
+*.pdb
+*.ilk
+*.suo
+*.user
+*.idb
+*.opensdf
+*.sdf
+*.VC.db
+*.VC.opendb
+
+# ==========================================
+# IDEs and Editors
+# ==========================================
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+.directory
+
+# ==========================================
+# Operating System Files
+# ==========================================
+Thumbs.db
+desktop.ini
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ==========================================
+# Runtime Simulation Data & Snapshots
+# ==========================================
+*.alife
+*.alife.tmp
+*.tmp
+*.csv
+data_exports/*.csv
+!data_exports/.gitkeep
+!assets/.gitkeep

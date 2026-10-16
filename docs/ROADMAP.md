@@ -1,0 +1,38 @@
+# Project Roadmap: Artificial Life & Evolution Simulator
+
+This roadmap tracks the incremental progression through the 10 development phases. Each phase is implemented and validated independently.
+
+---
+
+## Phase Overview & Status
+
+- [x] **Phase 1: Simulation Foundation** (Completed)
+  - Objective: Set up C++20, CMake, SFML 3, basic window, simulation clock, pause/resume/reset loop.
+  - Acceptance: Clean build, responsive window, controlled stepping, clean exit. Verified headless tests and rendering loop.
+- [x] **Phase 2: Organisms and Survival** (Completed)
+  - Objective: Living entities, energy consumption, movement, death on zero energy, population tracking.
+  - Acceptance: Organisms spawn deterministically, move, reflect at boundaries, burn basal & movement energy over simulation time, die at zero energy, and safe population management verified with unit tests and live rendering.
+- [x] **Phase 3: Food and Environment** (Completed)
+  - Objective: Resource spawning, foraging, consumption, boundary constraints, starvation dynamics.
+  - Acceptance: Food items spawn deterministically, regenerate periodically up to maximum capacity, organisms consume food within interaction distance, energy is restored and clamped to max, dead organisms cannot eat, simultaneous consumption collisions resolved atomically, and headless test suite passes.
+- [x] **Phase 4: Reproduction and Inheritance** (Completed)
+  - Objective: Offspring generation, trait transmission, configurable mutations, generation tracking.
+  - Acceptance: Asexual reproduction triggers on energy threshold, energy cost deducted, offspring inherits parental traits with controlled bounded mutations, generation and parentId tracked, reproduction cooldown enforced, population cap strictly maintained, and headless test suite passes.
+- [x] **Phase 5: Natural Selection** (Completed)
+  - Objective: Heritable variations (speed, perception, metabolism), survival metrics, selection pressure.
+  - Acceptance: Heritable traits directly affect metabolic energy expenditure and food interaction range, evolutionary metrics (mean, median, min, max, variance, stdDev, diversity CV) computed safely, LineageTracker tracks parentage and offspring count across deaths, HistoryRecorder exports CSV telemetry with experiment metadata, deterministic under seed, and headless test suite passes.
+- [x] **Phase 6: Neural Networks and Behaviour** (Completed)
+  - Objective: Sensory input vectors, neural controllers, evolved decision weights, inspection overlay.
+  - Acceptance: Fixed topology feedforward neural network (6 inputs -> 8 hidden -> 2 outputs) using tanh activation; 6 safe normalized sensor inputs (energy ratio, relative food angle, food distance, food detected flag, horizontal & vertical boundary positions); continuous action mapping to angular steering turn rate and speed throttle modifier; heritable weights and biases with bounded Gaussian-style mutation; zero per-frame heap allocations during inference; visual heading indicators and interactive organism neural controller inspector; 100% test coverage across all 15 automated test categories.
+- [x] **Phase 7: Complex Ecosystems** (Completed)
+  - Objective: Multi-species trophic levels (predator/prey), niche competition, carrying capacities.
+  - Acceptance: Configurable multi-species framework (Herbivores & Predators) with distinct physiological parameters; explicit predator-prey detection and single-consumption capture ($12.0\text{ px}$ capture radius, $+50$ energy transfer, immediate prey death); resource competition arbitration awarding food to closest consumer; simulation-time seasonal oscillation modulating resource regeneration ($\pm 50\%$) and passed to sensory neural controllers; species-level extinction safety; visual differentiation (green herbivores, crimson predators, predation rays, and real-time extinction warning HUD); 100% test coverage across all 16 automated Phase 7 test categories without regression.
+- [x] **Phase 8: Scientific Observation and Experiments** (Completed)
+  - Objective: Deterministic seeding, scientific data collection, event logs, parametric/non-parametric trait distributions, extinction tracking, multi-run comparison tools, and structured multi-table CSV telemetry.
+  - Acceptance: Decoupled scientific observation architecture; parametric and non-parametric trait statistics (mean, median, min, max, variance, stdDev, quartiles Q1/Q3, 5-bin frequency distributions); demographic accounting (growth rate, interval births/deaths, generations); multi-species tracking (herbivore and predator breakdown); explicit mortality cause attribution (starvation vs predation); bounded event logging (`EventLogger`) discarding oldest on limit; comprehensive CSV export suite (`population_history.csv`, `species_statistics.csv`, `trait_statistics.csv`, `ecosystem_history.csv`, `events.csv`, `experiment_metadata.csv`); deterministic reproducibility across runs with identical seeds; statistical experiment comparator (`ExperimentComparator`) reporting trajectory RMSE, divergence, and trait deltas; 100% automated test coverage across all 64 Phase 8 test assertions without regressions.
+- [x] **Phase 9: Performance and Scalability** (Completed)
+  - Objective: Spatial grid acceleration, vectorized cache-friendly data layout, neural network inference optimization, GPU draw call batching, reproducible benchmarking suite.
+  - Acceptance: Measured baseline performance across 5 scaled workloads (60 to 1,000 organisms); identified $O(N^2 + N \cdot M)$ proximity checks in sensors, predation, and food consumption accounting for $95.85\%$ of step time; implemented zero-allocation uniform 2D `SpatialGrid` reducing neighbour queries to $O(K)$; reordered neural network forward pass with stride-1 memory access eliminating inner-loop branching; batched SFML 3 rendering with pre-allocated vertex arrays slashing draw calls from $\sim 2,500$ down to $3$; demonstrated **$3.36\times$ simulation throughput increase** ($168.8 \rightarrow 573.9\text{ steps/s}$ on 1,000 organisms) with **$17.2\times$ faster predation resolution** and **$11.5\times$ faster consumption arbitration**; 100% test pass rate across 10 automated test suites with complete seed determinism.
+- [x] **Phase 10: Experimental Laboratory UI, Save/Load & Master UI/UX Transformation** (Completed)
+  - Objective: Complete UI/UX transformation into a 5-area scientific laboratory workspace, interactive controls, live organism inspector with click-selection and follow camera, 7 experiment presets with configuration validation, versioned atomic snapshot save/load (`ALIFE_SNAPSHOT_V1`), real-time scientific time-series plotting overlay, comprehensive CSV telemetry export, and 100% test pass rate across all 11 test suites without regressions.
+  - Acceptance: Transformed legacy dark-viewport with developer statistics overlay into a cohesive 5-area desktop laboratory (Top Bar, Left Controls Sidebar, Central Viewport strictly clipped via normalized viewports, Right Observation Sidebar with trophic balance bar & live event feed, and Bottom Collapsible Timeline with multi-series population charts, trait evolution, and lab guide); distinct faceted organism silhouettes (diamond kite predators, energy-modulated bio-emerald herbivores, glowing food octahedrons); full mouse interaction (camera pan drag, wheel zoom, organism hover card, click-to-select, button tooltips); 7 validated experiment presets; robust persistence (`ALIFE_SNAPSHOT_V1`); 100% pass rate across all 11 automated test suites and preserved Phase 9 performance throughput (>12,200 steps/s small, >570 steps/s stress).

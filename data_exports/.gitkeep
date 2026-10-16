@@ -1,0 +1,1 @@
+# Preserves the data_exports directory in git while ignoring dynamic CSV exports.
